@@ -1,0 +1,192 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CDialogInputData::mSelItem' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/norbe/Desktop/STUDIA/JiPP/sem2/mfc-app/Project-MFC/Project-MFC/CDialogInputData.cpp"
+                },
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 19
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CDialogInputData::{ctor}",
+                  "decoratedName": "??0CDialogInputData@@QEAA@PEAVCProjectMFCDoc@@PEAVCWnd@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CDialogInputData::mSelItem"
+          }
+        },
+        {
+          "ruleId": "C26454",
+          "message": {
+            "text": "Arithmetic overflow: '-' operation produces a negative unsigned result at compile time (io.5)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/norbe/Desktop/STUDIA/JiPP/sem2/mfc-app/Project-MFC/Project-MFC/CDialogInputData.cpp"
+                },
+                "region": {
+                  "startLine": 41,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CDialogInputData::GetThisMessageMap",
+                  "decoratedName": "?GetThisMessageMap@CDialogInputData@@KAPEBUAFX_MSGMAP@@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6273",
+          "message": {
+            "text": "Non-integer passed as _Param_(2) when an integer is required in call to 'ATL::CStringT<char,StrTraitMFC_DLL<char,ATL::ChTraitsCRT<char> > >::Format' Actual type: 'double'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/norbe/Desktop/STUDIA/JiPP/sem2/mfc-app/Project-MFC/Project-MFC/CDialogInputData.cpp"
+                },
+                "region": {
+                  "startLine": 90,
+                  "startColumn": 3,
+                  "endLine": 90,
+                  "endColumn": 24
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CDialogInputData::OnInitDialog",
+                  "decoratedName": "?OnInitDialog@CDialogInputData@@MEAAHXZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.39.33523.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///C:/Users/norbe/Desktop/STUDIA/JiPP/sem2/mfc-app/Project-MFC/Project-MFC/CDialogInputData.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "e4bb0f094923f28ebf5b02a1b13ba2a705d08ffa21ac47c07a3a6b84250115ba"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/norbe/desktop/studia/jipp/sem2/mfc-app/project-mfc/project-mfc/pch.h"
+          },
+          "hashes": {
+            "sha-256": "c2d8c468b0dd828eaa49a609c5e54ebca95ea4d2de3cd390e968e01c5d7f79ed"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/norbe/desktop/studia/jipp/sem2/mfc-app/project-mfc/project-mfc/framework.h"
+          },
+          "hashes": {
+            "sha-256": "3fbdf2536ce3b71811d81172bb1ccc2d58b44b569326433f3ca10477e724c4a4"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/norbe/desktop/studia/jipp/sem2/mfc-app/project-mfc/project-mfc/targetver.h"
+          },
+          "hashes": {
+            "sha-256": "a2761fdbd4c8925741ddea678ee8398de930207e447666bc6a76d5f72684c04f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/norbe/desktop/studia/jipp/sem2/mfc-app/project-mfc/project-mfc/project-mfc.h"
+          },
+          "hashes": {
+            "sha-256": "13175e135ff102118e9628ba2eb0f5e52c7c8aaa3a9940b330106b6f06d940d7"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/norbe/desktop/studia/jipp/sem2/mfc-app/project-mfc/project-mfc/resource.h"
+          },
+          "hashes": {
+            "sha-256": "6bfb46d86b66f9b80dfb0a6f0f2af8fd251a2faf04ac4b60665fc5dd5471635a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/norbe/desktop/studia/jipp/sem2/mfc-app/project-mfc/project-mfc/cdialoginputdata.h"
+          },
+          "hashes": {
+            "sha-256": "98b75976a9a0fbb6929459fe58c5d20e53d4ed5f02a008b0be5e9e834b1fb405"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/norbe/desktop/studia/jipp/sem2/mfc-app/project-mfc/mydata/mydata.h"
+          },
+          "hashes": {
+            "sha-256": "8bf6622ed4b8d6889d08129027f39d56240ec1bff22a5c57c3a9cd4ad5e77bd0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/norbe/desktop/studia/jipp/sem2/mfc-app/project-mfc/mydata/resource.h"
+          },
+          "hashes": {
+            "sha-256": "ae031ae92e65b5afa2754bfcd67d7b175a0e15bf6d663257041b259b35d7a8e4"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/norbe/desktop/studia/jipp/sem2/mfc-app/project-mfc/project-mfc/project-mfcdoc.h"
+          },
+          "hashes": {
+            "sha-256": "201e9037bea65d2d447c7373ceadbbebb38c8b149f02cf0a93d84e4f64ae23ed"
+          }
+        }
+      ]
+    }
+  ]
+}

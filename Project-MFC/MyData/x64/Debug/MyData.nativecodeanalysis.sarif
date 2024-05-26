@@ -1,0 +1,75 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.39.33523.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///c:/users/norbe/desktop/studia/jipp/sem2/mfc-app/project-mfc/mydata/mydata.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "68428922804cf843f8ff8e2b8e53cda1a914dd3952998fd316e2ae45b6d36f6e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/norbe/desktop/studia/jipp/sem2/mfc-app/project-mfc/mydata/pch.h"
+          },
+          "hashes": {
+            "sha-256": "c2d8c468b0dd828eaa49a609c5e54ebca95ea4d2de3cd390e968e01c5d7f79ed"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/norbe/desktop/studia/jipp/sem2/mfc-app/project-mfc/mydata/framework.h"
+          },
+          "hashes": {
+            "sha-256": "fb945c66158687ce52b18da120b6012f19ad1cffedc00b0645e670a7faef2ffb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/norbe/desktop/studia/jipp/sem2/mfc-app/project-mfc/mydata/targetver.h"
+          },
+          "hashes": {
+            "sha-256": "a2761fdbd4c8925741ddea678ee8398de930207e447666bc6a76d5f72684c04f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/norbe/desktop/studia/jipp/sem2/mfc-app/project-mfc/mydata/mydata.h"
+          },
+          "hashes": {
+            "sha-256": "8bf6622ed4b8d6889d08129027f39d56240ec1bff22a5c57c3a9cd4ad5e77bd0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/norbe/desktop/studia/jipp/sem2/mfc-app/project-mfc/mydata/resource.h"
+          },
+          "hashes": {
+            "sha-256": "ae031ae92e65b5afa2754bfcd67d7b175a0e15bf6d663257041b259b35d7a8e4"
+          }
+        }
+      ]
+    }
+  ]
+}

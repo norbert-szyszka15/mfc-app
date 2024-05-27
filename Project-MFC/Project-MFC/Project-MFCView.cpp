@@ -192,7 +192,7 @@ void CProjectMFCView::OnDraw(CDC* pDC)
 		newPen.DeleteObject();
 
 		//Output text
-		str.Format("vertex %d", iPoint);
+		str.Format("%s", point.name);
 		pDC->TextOut(scr.x + pointRad + 2, scr.y, str);
 	}
 

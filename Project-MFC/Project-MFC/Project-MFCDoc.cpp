@@ -94,7 +94,7 @@ void CProjectMFCDoc::Serialize(CArchive& ar)
 			for (int i = 0; i < noIt; ++i)
 			{
 				tmp = (*pDat)[i].get();
-				ar << tmp.x << tmp.y;
+				ar << tmp.x << tmp.y << tmp.color << tmp.name;
 			}
 		}
 	}
@@ -122,7 +122,7 @@ void CProjectMFCDoc::Serialize(CArchive& ar)
 
 			for (int i = 0; i < noIt; ++i)
 			{
-				ar >> tmp.x >> tmp.y;
+				ar >> tmp.x >> tmp.y >> tmp.color >> tmp.name;
 				pDat->Push(tmp);
 			}
 		}

@@ -30,9 +30,12 @@ void CExcept1App::PutMessage(UINT ID_Message) {
     char str[1024];
     int ret = LoadStringA(hInstance, ID_Message, str, sizeof(str));
 
-    if (ptrWnd) {
+    if (ptrWnd) 
+    {
         ptrWnd->SendMessage(WM_DIS_MSG, (WPARAM)str, (LPARAM)ptrDat);
-    } else if (!ptrWnd && str[0] == 'E') {
+    } 
+    else if (!ptrWnd && str[0] == 'E') 
+    {
         CString sstr(str);
         AfxMessageBox(sstr);
         UINT uExitCode = 0;
@@ -44,7 +47,8 @@ void CExcept1App::PutMessage(UINT ID_Message) {
 void CExcept1App::ClearOutWnd() {
     AFX_MANAGE_STATE(AfxGetStaticModuleState());
 
-    if (ptrWnd) {
+    if (ptrWnd) 
+    {
         ptrWnd->SendMessage(WM_CLEAR_OUTPUT, 0, 0);
     }
 }

@@ -42,6 +42,7 @@ public:
 	double mX;
 	double mY;
 	int mColor;
+	CString mName;
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnItemchangingListCtrl(NMHDR* pNMHDR, LRESULT* pResult);
 	CBrush mBrushColor;

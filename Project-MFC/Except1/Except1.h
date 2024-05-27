@@ -7,6 +7,8 @@
 #error "include 'pch.h' before including this file for PCH"
 #endif
 
+class MyData;
+
 #include "resource.h"      // main symbols
 #include "MyData.h"
 

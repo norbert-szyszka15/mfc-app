@@ -28,6 +28,7 @@ void CDialogInputData::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_LIST_CTRL, mListCtrl);
+	DDX_Text(pDX, IDC_EDIT_NAME, mName);
 	DDX_Text(pDX, IDC_EDIT_X, mX);
 	DDX_Text(pDX, IDC_EDIT_Y, mY);
 	DDX_Control(pDX, IDC_MFCCOLORBUTTON_POINT_COLOR, mColorButton);
@@ -52,7 +53,7 @@ BOOL CDialogInputData::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
-	CString strX, strY, color;
+	CString name, strX, strY, color;
 
 	lvi.mask = LVIF_TEXT;
 	lvi.state = 0;
@@ -74,9 +75,10 @@ BOOL CDialogInputData::OnInitDialog()
 
 	int ret;
 	int nFormat = LVCFMT_LEFT;
-	ret = mListCtrl.InsertColumn(0, "X", nFormat, columnWidth, 0);
-	ret = mListCtrl.InsertColumn(1, "Y", nFormat, columnWidth, 1);
-	ret = mListCtrl.InsertColumn(2, "Color", nFormat, columnWidth, 2);
+	ret = mListCtrl.InsertColumn(0, "Name", nFormat, columnWidth, 0);
+	ret = mListCtrl.InsertColumn(1, "X", nFormat, columnWidth, 1);
+	ret = mListCtrl.InsertColumn(2, "Y", nFormat, columnWidth, 2);
+	ret = mListCtrl.InsertColumn(3, "Color", nFormat, columnWidth, 3);
 
 	ASSERT(pDat);
 	int noItem = pDat->Size();
@@ -84,9 +86,11 @@ BOOL CDialogInputData::OnInitDialog()
 	lvi.iSubItem = 0;
 	mListCtrl.SetItemCount(noItem);
 
-	for (int i = 0; i < noItem; i++) {
+	for (int i = 0; i < noItem; i++)
+	{
 		MyPoint pt = (*pDat)[i];
 		lvi.iItem = i;
+		name = pt.name;
 		strX.Format("%le", pt.x);
 		size_t len = strlen(strX);
 		strY.Format("%le", pt.y);
@@ -97,9 +101,10 @@ BOOL CDialogInputData::OnInitDialog()
 		lvi.pszText = " ";
 		lvi.cchTextMax = (int)len;
 		ret = mListCtrl.InsertItem(&lvi);
-		mListCtrl.SetItemText(lvi.iItem, 0, strX);
-		mListCtrl.SetItemText(lvi.iItem, 1, strY);
-		mListCtrl.SetItemText(lvi.iItem, 2, color);
+		mListCtrl.SetItemText(lvi.iItem, 0, name);
+		mListCtrl.SetItemText(lvi.iItem, 1, strX);
+		mListCtrl.SetItemText(lvi.iItem, 2, strY);
+		mListCtrl.SetItemText(lvi.iItem, 3, color);
 	}
 
 	mColorButton.SetColor(RGB(0, 0, 0));
@@ -124,10 +129,12 @@ void CDialogInputData::ModifyData()
 	for (int nItem = 0; nItem < noIt; ++nItem)
 	{
 		ret = mListCtrl.GetItemText(nItem, 0, st, sizeof(st));
-		tmp.x = atof(st);
+		tmp.name = st;
 		ret = mListCtrl.GetItemText(nItem, 1, st, sizeof(st));
-		tmp.y = atof(st);
+		tmp.x = atof(st);
 		ret = mListCtrl.GetItemText(nItem, 2, st, sizeof(st));
+		tmp.y = atof(st);
+		ret = mListCtrl.GetItemText(nItem, 3, st, sizeof(st));
 		int colorInt = atoi(st); // Konwersja koloru z tekstu na liczbe calkowita
 		tmp.color = static_cast<COLORREF>(colorInt); // Przechowywanie koloru jako COLORREF
 
@@ -158,7 +165,7 @@ void CDialogInputData::OnClickedButtonAdd()
 	int nItem = mListCtrl.GetItemCount();
 	int ret = -1;
 	MyPoint tmp;
-	CString strX, strY, strColor;
+	CString strName, strX, strY, strColor;
 
 	UpdateData(TRUE);
 
@@ -172,23 +179,24 @@ void CDialogInputData::OnClickedButtonAdd()
 	tmp.x = mX;
 	tmp.y = mY;
 	tmp.color = mColor; // Przypisanie koloru punktu
+	tmp.name = mName;
 
 	// Dodanie punktu do globalnej instancji MyData
 	pDat->Push(tmp);
 
+	strName = mName;
 	strX.Format("%le", mX);
 	strY.Format("%le", mY);
-
-	// Formatowanie koloru jako tekst (RGB)
 	strColor.Format("%d", selectedColor); // Ustawianie koloru w formacie liczbowym
 
 	lvi.iItem = nItem;
 	lvi.pszText = _T("");
 	lvi.cchTextMax = 0;
 	ret = mListCtrl.InsertItem(&lvi);
-	mListCtrl.SetItemText(lvi.iItem, 0, strX);
-	mListCtrl.SetItemText(lvi.iItem, 1, strY);
-	mListCtrl.SetItemText(lvi.iItem, 2, strColor);
+	mListCtrl.SetItemText(lvi.iItem, 0, strName);
+	mListCtrl.SetItemText(lvi.iItem, 1, strX);
+	mListCtrl.SetItemText(lvi.iItem, 2, strY);
+	mListCtrl.SetItemText(lvi.iItem, 3, strColor);
 
 	UpdateData(FALSE);
 
@@ -206,7 +214,7 @@ void CDialogInputData::OnClickedButtonModify()
 	if (mSelItem < 0 || mSelItem >= noItem) { return; }
 
 	MyPoint tmp;
-	CString strX, strY, strColor;
+	CString strName, strX, strY, strColor;
 	int nItem = mSelItem;
 
 	UpdateData(TRUE);
@@ -218,6 +226,7 @@ void CDialogInputData::OnClickedButtonModify()
 	// Debugowanie: wyœwietlanie wartosci koloru
 	TRACE("Selected Color (COLORREF): R=%d, G=%d, B=%d\n", GetRValue(selectedColor), GetGValue(selectedColor), GetBValue(selectedColor));
 
+	tmp.name = mName;
 	tmp.x = mX;
 	tmp.y = mY;
 	tmp.color = mColor; // Przypisanie koloru punktu
@@ -225,16 +234,16 @@ void CDialogInputData::OnClickedButtonModify()
 	// Aktualizacja punktu w globalnej instancji MyData
 	(*pDat)[nItem] = tmp;
 
+	strName = mName;
 	strX.Format("%le", mX);
 	strY.Format("%le", mY);
-
-	// Formatowanie koloru jako tekst (RGB)
 	strColor.Format("%d", selectedColor); // Ustawianie koloru w formacie liczbowym
 
 	lvi.iItem = nItem;
-	mListCtrl.SetItemText(lvi.iItem, 0, strX);
-	mListCtrl.SetItemText(lvi.iItem, 1, strY);
-	mListCtrl.SetItemText(lvi.iItem, 2, strColor);
+	mListCtrl.SetItemText(lvi.iItem, 0, strName);
+	mListCtrl.SetItemText(lvi.iItem, 1, strX);
+	mListCtrl.SetItemText(lvi.iItem, 2, strY);
+	mListCtrl.SetItemText(lvi.iItem, 3, strColor);
 
 	UpdateData(FALSE);
 
@@ -283,12 +292,16 @@ void CDialogInputData::OnItemchangingListCtrl(NMHDR* pNMHDR, LRESULT* pResult)
 	char st[512];
 	BOOL ret = mListCtrl.GetItemText(nItem, nCol, st, sizeof(st));
 
-	mX = atof(st);
+	mName = st;
 	nCol = 1;
 	ret = mListCtrl.GetItemText(nItem, nCol, st, sizeof(st));
 
-	mY = atof(st);
+	mX = atof(st);
 	nCol = 2;
+	ret = mListCtrl.GetItemText(nItem, nCol, st, sizeof(st));
+
+	mY = atof(st);
+	nCol = 3;
 	ret = mListCtrl.GetItemText(nItem, nCol, st, sizeof(st));
 
 	int r, g, b;

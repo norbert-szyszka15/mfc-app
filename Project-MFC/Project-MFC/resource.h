@@ -100,6 +100,7 @@
 #define IDC_BUTTON_MODIFY               1009
 #define IDC_BUTTON_ADD                  1010
 #define IDC_BUTTON_DELETE               1011
+#define IDC_EDIT_NAME                   1012
 #define IDC_COLOR_BOX                   1015
 #define IDC_MFCCOLORBUTTON_POINT_COLOR  1016
 #define ID_OPERATE_INPUTDATA            32771

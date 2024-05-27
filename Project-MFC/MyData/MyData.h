@@ -4,10 +4,11 @@
 #pragma once
 
 #ifndef __AFXWIN_H__
-	#error "include 'pch.h' before including this file for PCH"
+#error "include 'pch.h' before including this file for PCH"
 #endif
 
 #include "resource.h"		// main symbols
+#include "Except1.h"       
 
 #ifdef MYDATA_EXPORTS
 #define MYDATA_API __declspec(dllexport)
@@ -19,12 +20,11 @@
 // See MyData.cpp for the implementation of this class
 //
 
-class CMyDataApp : public CWinApp
-{
+class CMyDataApp : public CWinApp {
 public:
 	CMyDataApp();
 
-// Overrides
+	// Overrides
 public:
 	virtual BOOL InitInstance();
 
@@ -33,28 +33,28 @@ public:
 
 #pragma pack(push, 1)
 //modyfikacja pat
-class MYDATA_API MyPoint
-{
+class MYDATA_API MyPoint {
 public:
+	CString name;
 	double x, y;
 	COLORREF color;  // Przechowywanie koloru jako COLORREF
 
-	MyPoint() : x(0), y(0), color(RGB(0, 0, 0)) {}
-	MyPoint(double xx, double yy, COLORREF c) : x(xx), y(yy), color(c) {}
+	MyPoint() : name(_T("point")), x(0), y(0), color(RGB(0, 0, 0)) {}
+	MyPoint(CString n, double xx, double yy, COLORREF c) : name(n), x(xx), y(yy), color(c) {}
 	~MyPoint() {}
-	void set(double xx, double yy, COLORREF c) { x = xx; y = yy; color = c; }
+	void set(CString n, double xx, double yy, COLORREF c) { name = n; x = xx; y = yy; color = c; }
 	MyPoint get() { return *this; }
 };
 
 //modyfikacja pat
-class MYDATA_API MyData
-{
+class MYDATA_API MyData {
 protected:
 	MyPoint* pTab;
 	int capacity;
 	int last;
 
 public:
+//	CExcept1App* pExcept;
 	MyData(int noIt);
 	MyData(const MyData& ob);
 	~MyData() { Free(); }
@@ -71,6 +71,5 @@ public:
 private:
 	MyPoint* allocTab(MyPoint* pTab, int n);
 };
-
 
 #pragma pack(pop)

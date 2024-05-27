@@ -1,6 +1,5 @@
 // MyData.cpp : Defines the initialization routines for the DLL.
 //
-
 #include "pch.h"
 #include "framework.h"
 #include "MyData.h"
@@ -77,14 +76,11 @@ MyPoint* MyData::allocTab(MyPoint* pTab, int n)
 	}
 	catch (std::bad_alloc)
 	{
-//		CExcept1App* pExp = (CExcept1App*);
-//		pExcept->PutMessagge(1002);
 	}
 }
 
 MyData::MyData(int noIt)
 {
-	//pExcept = getExceptPtr();
 	pTab = NULL;
 	Init(noIt);
 }

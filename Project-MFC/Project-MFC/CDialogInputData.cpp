@@ -1,13 +1,7 @@
-// CDialogInputData.cpp : implementation file
-//
-
 #include "pch.h"
 #include "Project-MFC.h"
 #include "afxdialogex.h"
 #include "CDialogInputData.h"
-
-
-// CDialogInputData dialog
 
 IMPLEMENT_DYNAMIC(CDialogInputData, CDialogEx)
 
@@ -20,9 +14,7 @@ CDialogInputData::CDialogInputData(CProjectMFCDoc* pDoc, CWnd* pParent /*=nullpt
 	pDat = pDocum->pDat;
 }
 
-CDialogInputData::~CDialogInputData()
-{
-}
+CDialogInputData::~CDialogInputData() {}
 
 void CDialogInputData::DoDataExchange(CDataExchange* pDX)
 {
@@ -35,7 +27,6 @@ void CDialogInputData::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_COLOR_BOX, mStaticColor);
 }
 
-
 BEGIN_MESSAGE_MAP(CDialogInputData, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_ADD, &CDialogInputData::OnClickedButtonAdd)
 	ON_BN_CLICKED(IDC_BUTTON_MODIFY, &CDialogInputData::OnClickedButtonModify)
@@ -45,9 +36,6 @@ BEGIN_MESSAGE_MAP(CDialogInputData, CDialogEx)
 	ON_WM_CTLCOLOR()
 	ON_BN_CLICKED(IDC_MFCCOLORBUTTON_POINT_COLOR, &CDialogInputData::OnBnClickedMfccolorbuttonPointColor)
 END_MESSAGE_MAP()
-
-
-// CDialogInputData message handlers
 
 BOOL CDialogInputData::OnInitDialog() 
 {
@@ -109,11 +97,9 @@ BOOL CDialogInputData::OnInitDialog()
 
 	mColorButton.SetColor(RGB(0, 0, 0));
 
-	return TRUE;	// return TRUE unless you set the focus to a control
-	// EXCEPTION: OCX Property Pages should return FALSE
+	return TRUE;
 }
 
-//zmiany pat
 void CDialogInputData::ModifyData()
 {
 	char st[512];
@@ -135,8 +121,8 @@ void CDialogInputData::ModifyData()
 		ret = mListCtrl.GetItemText(nItem, 2, st, sizeof(st));
 		tmp.y = atof(st);
 		ret = mListCtrl.GetItemText(nItem, 3, st, sizeof(st));
-		int colorInt = atoi(st); // Konwersja koloru z tekstu na liczbe calkowita
-		tmp.color = static_cast<COLORREF>(colorInt); // Przechowywanie koloru jako COLORREF
+		int colorInt = atoi(st); 
+		tmp.color = static_cast<COLORREF>(colorInt); 
 
 		pDat->Push(tmp);
 	}
@@ -169,25 +155,22 @@ void CDialogInputData::OnClickedButtonAdd()
 
 	UpdateData(TRUE);
 
-	// Pobieranie koloru z kontrolki CMFCColorButton
 	COLORREF selectedColor = mColorButton.GetColor();
-	mColor = selectedColor; // Ustawianie koloru punktu
+	mColor = selectedColor; 
 
-	// Debugowanie: wyœwietlanie wartosci koloru
 	TRACE("Selected Color (COLORREF): R=%d, G=%d, B=%d\n", GetRValue(selectedColor), GetGValue(selectedColor), GetBValue(selectedColor));
 
 	tmp.x = mX;
 	tmp.y = mY;
-	tmp.color = mColor; // Przypisanie koloru punktu
+	tmp.color = mColor;
 	tmp.name = mName;
 
-	// Dodanie punktu do globalnej instancji MyData
 	pDat->Push(tmp);
 
 	strName = mName;
 	strX.Format("%le", mX);
 	strY.Format("%le", mY);
-	strColor.Format("%d", selectedColor); // Ustawianie koloru w formacie liczbowym
+	strColor.Format("%d", selectedColor); 
 
 	lvi.iItem = nItem;
 	lvi.pszText = _T("");
@@ -205,7 +188,6 @@ void CDialogInputData::OnClickedButtonAdd()
 	pDocum->UpdateAllViews(NULL);
 }
 
-//zmiany pat
 void CDialogInputData::OnClickedButtonModify()
 {
 	int ret = -1;
@@ -219,25 +201,22 @@ void CDialogInputData::OnClickedButtonModify()
 
 	UpdateData(TRUE);
 
-	// Pobieranie koloru z kontrolki CMFCColorButton
 	COLORREF selectedColor = mColorButton.GetColor();
-	mColor = selectedColor; // Ustawianie koloru punktu
+	mColor = selectedColor;
 
-	// Debugowanie: wyœwietlanie wartosci koloru
 	TRACE("Selected Color (COLORREF): R=%d, G=%d, B=%d\n", GetRValue(selectedColor), GetGValue(selectedColor), GetBValue(selectedColor));
 
 	tmp.name = mName;
 	tmp.x = mX;
 	tmp.y = mY;
-	tmp.color = mColor; // Przypisanie koloru punktu
+	tmp.color = mColor;
 
-	// Aktualizacja punktu w globalnej instancji MyData
 	(*pDat)[nItem] = tmp;
 
 	strName = mName;
 	strX.Format("%le", mX);
 	strY.Format("%le", mY);
-	strColor.Format("%d", selectedColor); // Ustawianie koloru w formacie liczbowym
+	strColor.Format("%d", selectedColor);
 
 	lvi.iItem = nItem;
 	mListCtrl.SetItemText(lvi.iItem, 0, strName);
@@ -311,13 +290,11 @@ void CDialogInputData::OnItemchangingListCtrl(NMHDR* pNMHDR, LRESULT* pResult)
 	}
 	else
 	{
-		mColor = atol(st); // U¿ycie liczby ca³kowitej, jeœli parsowanie siê nie powiedzie
+		mColor = atol(st);
 	}
 
-	// Ustawienie koloru w CMFCColorButton
 	mColorButton.SetColor(mColor);
 
-	// Zaktualizowanie koloru w polu statycznym
 	mBrushColor.DeleteObject();
 	mBrushColor.CreateSolidBrush(mColorButton.GetColor());
 	mStaticColor.Invalidate();
@@ -326,25 +303,17 @@ void CDialogInputData::OnItemchangingListCtrl(NMHDR* pNMHDR, LRESULT* pResult)
 	UpdateData(FALSE);
 }
 
-
-
-//	COLOR DECLARATION
-
 HBRUSH CDialogInputData::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor) 
 {
 	HBRUSH hbr = CDialogEx::OnCtlColor(pDC, pWnd, nCtlColor);
 
-	// TODO:  Change any attributes of the DC here
 	if (nCtlColor == CTLCOLOR_STATIC && pWnd->GetDlgCtrlID() == IDC_COLOR_BOX) { hbr = mBrushColor; }
 
 	return hbr;
 }
 
-
-
 void CDialogInputData::OnBnClickedMfccolorbuttonPointColor() 
 {
-	// TODO: Add your control notification handler code here
 	mBrushColor.DeleteObject();
 	mBrushColor.CreateSolidBrush(mColorButton.GetColor());
 	mStaticColor.Invalidate();

@@ -99,6 +99,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <ModuleDefinitionFile>.\MyData.def</ModuleDefinitionFile>
+      <AdditionalDependencies>Except1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\LibDbg64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -182,6 +184,7 @@ copy $(TargetPath) ..\..\ExeDbg64\$(TargetName).dll</Command>
       <OptimizeReferences>true</OptimizeReferences>
       <ModuleDefinitionFile>.\MyData.def</ModuleDefinitionFile>
       <AdditionalDependencies>Except1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\Lib64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>

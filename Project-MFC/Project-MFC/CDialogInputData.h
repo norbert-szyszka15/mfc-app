@@ -3,26 +3,18 @@
 #include "MyData.h"
 #include "Project-MFCDoc.h"
 
-
-
-
-// CDialogInputData dialog
-
 class CDialogInputData : public CDialogEx
 {
 	DECLARE_DYNAMIC(CDialogInputData)
 
 public:
-	CDialogInputData(CProjectMFCDoc* pDoc, CWnd* pParent = nullptr);   // standard constructor
+	CDialogInputData(CProjectMFCDoc* pDoc, CWnd* pParent = nullptr);
 	virtual ~CDialogInputData();
-
-// Dialog Data
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_DIALOG_INPUT_DATA };
 #endif
-
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+	virtual void DoDataExchange(CDataExchange* pDX);
 	virtual BOOL OnInitDialog();
 
 	void ModifyData();

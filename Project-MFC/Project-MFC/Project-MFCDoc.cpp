@@ -1,11 +1,5 @@
-
-// Project-MFCDoc.cpp : implementation of the CProjectMFCDoc class
-//
-
 #include "pch.h"
 #include "framework.h"
-// SHARED_HANDLERS can be defined in an ATL project implementing preview, thumbnail
-// and search filter handlers and allows sharing of document code with that project.
 #ifndef SHARED_HANDLERS
 #include "Project-MFC.h"
 #endif
@@ -20,19 +14,13 @@
 #define new DEBUG_NEW
 #endif
 
-// CProjectMFCDoc
-
 IMPLEMENT_DYNCREATE(CProjectMFCDoc, CDocument)
 
 BEGIN_MESSAGE_MAP(CProjectMFCDoc, CDocument)
 END_MESSAGE_MAP()
 
-
-// CProjectMFCDoc construction/destruction
-
 CProjectMFCDoc::CProjectMFCDoc() noexcept
 {
-	// TODO: add one-time construction code here
 	pDat = NULL;
 	pExcept = GetExceptPtr();
 }
@@ -53,9 +41,6 @@ BOOL CProjectMFCDoc::OnNewDocument()
 		return FALSE; 
 	}
 
-	// TODO: add reinitialization code here
-	// (SDI documents will reuse this document)
-
 	if (pDat)
 	{
 		delete pDat;
@@ -74,17 +59,10 @@ BOOL CProjectMFCDoc::OnNewDocument()
 	return TRUE;
 }
 
-
-
-
-// CProjectMFCDoc serialization
-
 void CProjectMFCDoc::Serialize(CArchive& ar)
 {
 	if (ar.IsStoring())
 	{
-		// TODO: add storing code here
-
 		if (pDat)
 		{
 			MyPoint tmp;
@@ -100,7 +78,6 @@ void CProjectMFCDoc::Serialize(CArchive& ar)
 	}
 	else
 	{
-		// TODO: add loading code here
 		if (pDat) { delete pDat; }
 
 		int noIt(0);
@@ -196,7 +173,4 @@ void CProjectMFCDoc::Dump(CDumpContext& dc) const
 {
 	CDocument::Dump(dc);
 }
-#endif //_DEBUG
-
-
-// CProjectMFCDoc commands
+#endif

@@ -1,5 +1,6 @@
 ﻿  MyData.cpp
-C:\Users\norbe\Desktop\STUDIA\JiPP\sem2\mfc-app\Project-MFC\MyData\MyData.cpp(80,1): warning C4715: 'MyData::allocTab': not all control paths return a value
+C:\Users\norbe\Desktop\STUDIA\JiPP\sem2\mfc-app\Project-MFC\MyData\MyData.cpp(148,1): warning C4715: 'MyData::allocTab': not all control paths return a value
+     Creating library C:\Users\norbe\Desktop\STUDIA\JiPP\sem2\mfc-app\Project-MFC\x64\Debug\MyData.lib and object C:\Users\norbe\Desktop\STUDIA\JiPP\sem2\mfc-app\Project-MFC\x64\Debug\MyData.exp
   MyData.vcxproj -> C:\Users\norbe\Desktop\STUDIA\JiPP\sem2\mfc-app\Project-MFC\x64\Debug\MyData.dll
   Performing Custom Build Step
           1 file(s) copied.

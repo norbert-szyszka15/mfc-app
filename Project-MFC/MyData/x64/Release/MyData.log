@@ -1,0 +1,12 @@
+﻿  pch.cpp
+  MyData.cpp
+     Creating library C:\Users\norbe\Desktop\STUDIA\JiPP\sem2\mfc-app\Project-MFC\x64\Release\MyData.lib and object C:\Users\norbe\Desktop\STUDIA\JiPP\sem2\mfc-app\Project-MFC\x64\Release\MyData.exp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+C:\Users\norbe\Desktop\STUDIA\JiPP\sem2\mfc-app\Project-MFC\MyData\MyData.cpp(83): warning C4715: 'MyData::allocTab': not all control paths return a value
+  All 163 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  MyData.vcxproj -> C:\Users\norbe\Desktop\STUDIA\JiPP\sem2\mfc-app\Project-MFC\x64\Release\MyData.dll
+  Performing Custom Build Step
+          1 file(s) copied.
+          1 file(s) copied.

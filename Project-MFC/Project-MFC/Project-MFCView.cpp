@@ -1,11 +1,6 @@
-
-// Project-MFCView.cpp : implementation of the CProjectMFCView class
-//
-
 #include "pch.h"
 #include "framework.h"
-// SHARED_HANDLERS can be defined in an ATL project implementing preview, thumbnail
-// and search filter handlers and allows sharing of document code with that project.
+
 #ifndef SHARED_HANDLERS
 #include "Project-MFC.h"
 #endif
@@ -18,13 +13,9 @@
 #define new DEBUG_NEW
 #endif
 
-
-// CProjectMFCView
-
 IMPLEMENT_DYNCREATE(CProjectMFCView, CView)
 
 BEGIN_MESSAGE_MAP(CProjectMFCView, CView)
-	// Standard printing commands
 	ON_COMMAND(ID_FILE_PRINT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CProjectMFCView::OnFilePrintPreview)
@@ -33,11 +24,8 @@ BEGIN_MESSAGE_MAP(CProjectMFCView, CView)
 	ON_COMMAND(ID_OPERATE_INPUT_DATA, &CProjectMFCView::OnOperateInputData)
 END_MESSAGE_MAP()
 
-// CProjectMFCView construction/destruction
-
 CProjectMFCView::CProjectMFCView() noexcept
 {
-	// TODO: add construction code here
 	mScaleX = mScaleY = 1.0;
 	pointRad = 8;
 
@@ -46,14 +34,11 @@ CProjectMFCView::CProjectMFCView() noexcept
 	strcpy_s(lf.lfFaceName, "Arial");
 }
 
-CProjectMFCView::~CProjectMFCView()
+CProjectMFCView::~CProjectMFCView() {}
+
+void CProjectMFCView::OnInitialUpdate() 
 {
-}
-
-void CProjectMFCView::OnInitialUpdate() {
 	CView::OnInitialUpdate();
-
-	// TODO: Add your specialized code here and/or call the base class
 	CWnd* ptrWnd = this->GetActiveWindow();
 	CProjectMFCDoc* pDoc = GetDocument();
 	
@@ -67,13 +52,8 @@ void CProjectMFCView::OnInitialUpdate() {
 
 BOOL CProjectMFCView::PreCreateWindow(CREATESTRUCT& cs)
 {
-	// TODO: Modify the Window class or styles here by modifying
-	//  the CREATESTRUCT cs
-
 	return CView::PreCreateWindow(cs);
 }
-
-// CProjectMFCView drawing
 
 CPoint CProjectMFCView::GetScreenCoord(DCOORD Coord, DCOORD min, DCOORD max, SIZE size, SIZE marg, int hsbpos, int vsbpos) 
 {
@@ -104,14 +84,12 @@ CPoint CProjectMFCView::GetScreenCoord(DCOORD Coord, DCOORD min, DCOORD max, SIZ
 	return scr;
 }
 
-//modyfikacja pat
 void CProjectMFCView::OnDraw(CDC* pDC)
 {
 	CProjectMFCDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 	if (!pDoc) { return; }
 
-	// TODO: add draw code for native data here
 	pDC->SetMapMode(MM_TEXT);
 	pDC->SetGraphicsMode(GM_ADVANCED);
 
@@ -123,11 +101,10 @@ void CProjectMFCView::OnDraw(CDC* pDC)
 	CBrush newBrush;
 	CBrush* oldBrush;
 
-	CPoint scr;       //screen coordinates;
-	SIZE size1;   //client rect extension in pixels 
-	SIZE marg = { 80,80 }; //margines in pixels
+	CPoint scr;
+	SIZE size1;
+	SIZE marg = { 80,80 };
 
-	//set font
 	VERIFY(font.CreateFontIndirect(&lf));
 	CFont* defFont = pDC->SelectObject(&font);
 
@@ -163,7 +140,6 @@ void CProjectMFCView::OnDraw(CDC* pDC)
 		MyPoint point = (*pDoc->pDat)[iPoint];
 		COLORREF pointColor = point.color;
 
-		// Debugowanie: wyœwietlanie wartoœci koloru punktu
 		TRACE("Drawing Point: X=%lf, Y=%lf, Color: R=%d, G=%d, B=%d\n",
 			point.x, point.y, GetRValue(pointColor), GetGValue(pointColor), GetBValue(pointColor));
 
@@ -173,7 +149,6 @@ void CProjectMFCView::OnDraw(CDC* pDC)
 		pDC->SelectObject(oldBrush);
 		newBrush.DeleteObject();
 
-		//Draw lines
 		pDC->SelectObject(oldPen);
 		newPen.DeleteObject();
 		newPen.CreatePen(PS_SOLID, 2, RGB(255, 0, 0));
@@ -191,7 +166,6 @@ void CProjectMFCView::OnDraw(CDC* pDC)
 		pDC->SelectObject(oldPen);
 		newPen.DeleteObject();
 
-		//Output text
 		str.Format("%s", point.name);
 		pDC->TextOut(scr.x + pointRad + 2, scr.y, str);
 	}
@@ -203,10 +177,6 @@ void CProjectMFCView::OnDraw(CDC* pDC)
 	font.DeleteObject();
 }
 
-
-// CProjectMFCView printing
-
-
 void CProjectMFCView::OnFilePrintPreview()
 {
 #ifndef SHARED_HANDLERS
@@ -216,19 +186,12 @@ void CProjectMFCView::OnFilePrintPreview()
 
 BOOL CProjectMFCView::OnPreparePrinting(CPrintInfo* pInfo)
 {
-	// default preparation
 	return DoPreparePrinting(pInfo);
 }
 
-void CProjectMFCView::OnBeginPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
-{
-	// TODO: add extra initialization before printing
-}
+void CProjectMFCView::OnBeginPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/) {}
 
-void CProjectMFCView::OnEndPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
-{
-	// TODO: add cleanup after printing
-}
+void CProjectMFCView::OnEndPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/) {}
 
 void CProjectMFCView::OnRButtonUp(UINT /* nFlags */, CPoint point)
 {
@@ -243,9 +206,6 @@ void CProjectMFCView::OnContextMenu(CWnd* /* pWnd */, CPoint point)
 #endif
 }
 
-
-// CProjectMFCView diagnostics
-
 #ifdef _DEBUG
 void CProjectMFCView::AssertValid() const
 {
@@ -257,19 +217,15 @@ void CProjectMFCView::Dump(CDumpContext& dc) const
 	CView::Dump(dc);
 }
 
-CProjectMFCDoc* CProjectMFCView::GetDocument() const // non-debug version is inline
+CProjectMFCDoc* CProjectMFCView::GetDocument() const
 {
 	ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(CProjectMFCDoc)));
 	return (CProjectMFCDoc*)m_pDocument;
 }
-#endif //_DEBUG
-
-
-// CProjectMFCView message handlers
+#endif
 
 void CProjectMFCView::OnOperateInputData() 
 {
-	// TODO: Add your command handler code here
 	CProjectMFCDoc* pDoc = GetDocument();
 	CDialogInputData dlg(pDoc);
 	dlg.DoModal();

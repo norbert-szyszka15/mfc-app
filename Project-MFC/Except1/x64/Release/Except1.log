@@ -1,9 +1,9 @@
-﻿  pch.cpp
-  Except1.cpp
+﻿  Except1.cpp
      Creating library C:\Users\norbe\Desktop\STUDIA\JiPP\sem2\mfc-app\Project-MFC\x64\Release\Except1.lib and object C:\Users\norbe\Desktop\STUDIA\JiPP\sem2\mfc-app\Project-MFC\x64\Release\Except1.exp
   Generating code
-  Previous IPDB not found, fall back to full compilation.
-  All 138 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  38 of 138 functions (27.5%) were compiled, the rest were copied from previous compilation.
+    2 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Except1.vcxproj -> C:\Users\norbe\Desktop\STUDIA\JiPP\sem2\mfc-app\Project-MFC\x64\Release\Except1.dll
   Performing Custom Build Step

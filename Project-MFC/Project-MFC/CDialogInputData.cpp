@@ -59,7 +59,7 @@ BOOL CDialogInputData::OnInitDialog()
 	mListCtrl.GetClientRect(&rectListCtrl);
 
 	int listCtrlWidth = rectListCtrl.right - rectListCtrl.left;
-	int columnWidth = listCtrlWidth / 3;
+	int columnWidth = listCtrlWidth / 4;
 
 	int ret;
 	int nFormat = LVCFMT_LEFT;
@@ -134,12 +134,12 @@ void CDialogInputData::ModifyData()
 	pDocum->UpdateAllViews(NULL);
 }
  
-double ColorToDouble(COLORREF color)
+static double ColorToDouble(COLORREF color)
 {
 	return (double)((GetRValue(color) << 16) | (GetGValue(color) << 8) | GetBValue(color));
 }
 
-COLORREF DoubleToColor(double color)
+static COLORREF DoubleToColor(double color)
 {
 	int intColor = (int)color;
 	return RGB((intColor >> 16) & 0xFF, (intColor >> 8) & 0xFF, intColor & 0xFF);
@@ -247,6 +247,14 @@ void CDialogInputData::OnClickedButtonDelete()
 	pDocum->UpdateAllViews(NULL);
 }
 
+void CDialogInputData::OnBnClickedMfccolorbuttonPointColor() {
+	mBrushColor.DeleteObject();
+	mBrushColor.CreateSolidBrush(mColorButton.GetColor());
+	mStaticColor.Invalidate();
+	mStaticColor.UpdateWindow();
+}
+
+
 void CDialogInputData::OnBnClickedOk()
 {
 	CDialogEx::OnOK();
@@ -310,12 +318,4 @@ HBRUSH CDialogInputData::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 	if (nCtlColor == CTLCOLOR_STATIC && pWnd->GetDlgCtrlID() == IDC_COLOR_BOX) { hbr = mBrushColor; }
 
 	return hbr;
-}
-
-void CDialogInputData::OnBnClickedMfccolorbuttonPointColor() 
-{
-	mBrushColor.DeleteObject();
-	mBrushColor.CreateSolidBrush(mColorButton.GetColor());
-	mStaticColor.Invalidate();
-	mStaticColor.UpdateWindow();
 }
